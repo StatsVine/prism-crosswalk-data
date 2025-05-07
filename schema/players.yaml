@@ -1,0 +1,36 @@
+---
+fields:
+  prism_id:
+    type: string
+    required: true
+    description: Internal PRISM id. Globally unique.
+    notes: Crockford's base32, lowercase (A-Z, 0-9, excluding I, L, O). Default is 10 chars (6 bytes), max size 16 characters (10 bytes). 
+    pattern: ^[0123456789abcdefghjkmnpqrstvwxyz]{10,16}$
+    unique: true
+  last_name:
+    type: string
+    required: true
+    description: Last name of player
+    pattern: "^[A-Za-zÀ-ÖØ-öø-ÿ'’\\-\\. ]{1,64}$"
+  first_name:
+    type: string
+    required: true
+    description: First name of player
+    pattern: "^[A-Za-zÀ-ÖØ-öø-ÿ'’\\-\\. ]{1,64}$"
+  middle_name:
+    type: string
+    required: false
+    description: Middle name (or initial) of player
+    pattern: "^[A-Za-zÀ-ÖØ-öø-ÿ'’\\-\\. ]{1,64}$"
+  birth_year:
+    type: integer
+    required: false
+    description: Player's year of birth
+  birth_month:
+    type: integer
+    required: false
+    description: Player's month of birth
+  birth_day:
+    type: integer
+    required: false
+    description: Player's day of birth
