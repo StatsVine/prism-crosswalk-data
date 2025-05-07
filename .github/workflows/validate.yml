@@ -35,4 +35,4 @@ jobs:
 
       - name: Run CSV validation on MLB players
         run: |
-          python3 tools/crosswalk/validate_players.py --csv data/mlb/players.csv --core-schema schema/players.yaml --source-schema schema/leagues/mlb/sources.yaml --fail-fast true
+          python3 tools/crosswalk/validate_players.py --csv data/mlb/players.csv --core-schema schema/players.yaml --source-schema schema/leagues/mlb/sources.yaml --fail-fast
