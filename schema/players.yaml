@@ -4,8 +4,8 @@ fields:
     type: string
     required: true
     description: Internal PRISM id. Globally unique.
-    notes: Crockford's base32, lowercase (A-Z, 0-9, excluding I, L, O). Default is 10 chars (6 bytes), max size 16 characters (10 bytes). 
-    pattern: ^[0123456789abcdefghjkmnpqrstvwxyz]{10,16}$
+    notes: modified base32, lowercase (a-z, 0-9, excluding aiou). Default is 10 chars (6 bytes), max size 16 characters (10 bytes).
+    pattern: ^[0123456789bcdefghjklmnpqrstvwxyz]{10,16}$
     unique: true
   last_name:
     type: string
