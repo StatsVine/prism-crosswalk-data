@@ -1,11 +1,12 @@
 ---
 players:
   - bbref:
-    name: Baseball Reference
+    name: Baseball Reference (Majors)
     id_field: bbref_id
     active: true
-    required: true
+    required: false
     pattern: ^[a-z]{1,5}[a-z]{1,2}[0-9]{2}$
+    note: Players don't get a major leagues Baseball Reference ID until major league service time is accumulated, but it can be inferred
   - espn:
     name: ESPN
     id_field: espn_id
