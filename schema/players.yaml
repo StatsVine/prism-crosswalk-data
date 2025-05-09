@@ -26,11 +26,14 @@ fields:
     type: integer
     required: false
     description: Player's year of birth
+    pattern: "^(18[6-9]\\d|19\\d{2}|20[0-1]\\d)$"
   birth_month:
     type: integer
     required: false
     description: Player's month of birth
+    pattern: "^(0?[1-9]|1[0-2])$"
   birth_day:
     type: integer
     required: false
     description: Player's day of birth
+    pattern: "^(0?[1-9]|[12][0-9]|3[01])$"
