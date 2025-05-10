@@ -30,7 +30,7 @@ players:
     name: National Fantasy Baseball Championship
     id_field: nfbc_id
     active: true
-    required: true
+    required: false
     stable: true
     pattern: ^\d{2,8}$
   - sfbb:
