@@ -2,15 +2,7 @@ name: Validate CSV data
 
 on:
   push:
-    paths:
-      - 'data/**/*.csv'
-      - 'schemas/**'
-      - '.github/workflows/validate.yml'
   pull_request:
-    paths:
-      - 'data/**/*.csv'
-      - 'schemas/**'
-      - '.github/workflows/validate.yml'
 
 jobs:
   validate:
