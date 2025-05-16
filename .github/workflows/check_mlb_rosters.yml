@@ -5,6 +5,10 @@ on:
   #schedule:
   #  - cron: '0 12 * * *'  # every day at noon UTC
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   check_mlb_rosters:
     runs-on: ubuntu-latest
