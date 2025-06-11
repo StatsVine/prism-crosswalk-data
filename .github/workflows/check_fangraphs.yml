@@ -2,8 +2,8 @@ name: Check Fangraphs Ids
 
 on:
   workflow_dispatch:  # manually triggered
-  #schedule:
-  #  - cron: '0 12 * * *'  # every day at noon UTC
+  schedule:
+    - cron: '5 13 * 4-10 *'  # every day at 1PM UTC (Pacific morning), April thru October
 
 permissions:
   contents: read
