@@ -34,7 +34,7 @@ jobs:
       - name: Run roster check script
         id: run-script
         run: |
-          python tools/crosswalk/validate_sfbb_ids.py data/mlb/players.csv --issues sfbb_issues.md
+          python tools/crosswalk/validate_sfbb_ids.py data/mlb/players.csv --issues sfbb_issues.md --ignores-file .validation/ignore_sfbb.yaml
           if [ -f sfbb_issues.md ]; then
             echo "issues_file_found=1" >> $GITHUB_ENV
           fi
