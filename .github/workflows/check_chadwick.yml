@@ -1,4 +1,4 @@
-name: Check SFBB Ids
+name: Check Chadwick Ids
 
 on:
   workflow_dispatch:  # manually triggered
