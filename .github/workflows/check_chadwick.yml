@@ -3,7 +3,7 @@ name: Check SFBB Ids
 on:
   workflow_dispatch:  # manually triggered
   schedule:
-    - cron: '15 13 * * *'  # every day at 13:05 UTC (Pacific morning)
+    - cron: '15 13 * * *'  # every day at 13:15 UTC (Pacific morning)
 
 permissions:
   contents: read
