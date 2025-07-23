@@ -45,6 +45,6 @@ players:
     name: Yahoo Fantasy
     id_field: yahoo_id
     active: true
-    required: true
+    required: false
     stable: true
     pattern: ^\d{2,8}$
