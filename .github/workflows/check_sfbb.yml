@@ -38,6 +38,17 @@ jobs:
           if [ -f sfbb_issues.md ]; then
             echo "issues_file_found=1" >> $GITHUB_ENV
           fi
+      
+      - name: Find the last open report issue
+        if: env.issues_file_found == '1'
+        id: last-issue
+        uses: micalevisk/last-issue-action@v2
+        with:
+          state: open
+          labels: |
+            mlb
+            source-sfbb
+            roster-gap
 
       - name: Create GitHub Issue
         if: env.issues_file_found == '1'
@@ -45,4 +56,5 @@ jobs:
         with:
           title: "📃 SFBB ID differences detected"
           content-filepath: ./sfbb_issues.md
+          issue-number: ${{ steps.last-issue.outputs.issue-number }}
           labels: mlb, source-sfbb, roster-gap
