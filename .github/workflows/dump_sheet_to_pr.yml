@@ -68,13 +68,6 @@ jobs:
         id: sort_by_col
         run: |
           python tools/csv/sort_by_col.py ${{github.event.inputs.csvFile}}
-
-      - name: HACK dos2unix the CSV file
-        #TODO our tools currently use \r\n because of python CSV writer default behavior
-        # work around this for now
-        id: dos2unix
-        run: |
-          dos2unix ${{github.event.inputs.csvFile}}
       
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
