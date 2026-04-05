@@ -54,18 +54,18 @@ jobs:
           pip install -r tools/requirements.txt || true
 
       - name: Run dump sheet script
-        id: run-script
+        id: dump_sheet
         run: |
           python tools/crosswalk/dump_sheets_to_csv.py ${{github.event.inputs.sheetId}} --gid ${{github.event.inputs.sheetGid}} --core-schema ${{github.event.inputs.coreSchema}} --source-schema ${{github.event.inputs.message.sourceSchema}} --out ${{github.event.inputs.csvFile}}
       
       - name: Generate missing IDs
-        id: run-script
+        id: generate_missing_ids
         # TODO we're using defaults here, should probably parameterize
         run: |
           python tools/csv/generate_missing_ids.py --csv ${{github.event.inputs.csvFile}}
       
       - name: Sort by ID
-        id: run-script
+        id: sort_by_col
         run: |
           python tools/csv/sort_by_col.py --csv ${{github.event.inputs.csvFile}}
       
