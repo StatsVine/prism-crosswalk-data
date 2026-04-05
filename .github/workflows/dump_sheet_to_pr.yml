@@ -67,7 +67,7 @@ jobs:
       - name: Sort by ID
         id: sort_by_col
         run: |
-          python tools/csv/sort_by_col.py --csv ${{github.event.inputs.csvFile}}
+          python tools/csv/sort_by_col.py ${{github.event.inputs.csvFile}}
       
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
