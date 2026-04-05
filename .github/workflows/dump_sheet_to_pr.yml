@@ -56,7 +56,7 @@ jobs:
       - name: Run dump sheet script
         id: dump_sheet
         run: |
-          python tools/crosswalk/dump_sheets_to_csv.py ${{github.event.inputs.sheetId}} --gid ${{github.event.inputs.sheetGid}} --core-schema ${{github.event.inputs.coreSchema}} --source-schema ${{github.event.inputs.message.sourceSchema}} --out ${{github.event.inputs.csvFile}}
+          python tools/crosswalk/dump_sheets_to_csv.py ${{github.event.inputs.sheetId}} --gid ${{github.event.inputs.sheetGid}} --core-schema ${{github.event.inputs.coreSchema}} --source-schema ${{github.event.inputs.sourceSchema}} --out ${{github.event.inputs.csvFile}}
       
       - name: Generate missing IDs
         id: generate_missing_ids
