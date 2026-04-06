@@ -1,0 +1,77 @@
+name: Dump sheet to CSV, create a new PR
+
+on:
+  workflow_dispatch:  # manually triggered
+    inputs:
+      sheetId:
+        description: 'Google sheet ID'
+        required: true
+      sheetGid:
+        description: 'Google sheet gid'
+        required: true
+        default: '0'
+      branchName:
+        description: 'Branch name'
+        required: true
+        default: 'mlb_update'
+      coreSchema:
+        description: 'Core schema yaml (for field names)'
+        required: true
+        default: 'schema/players.yaml'
+      sourceSchema:
+        description: 'Source schema yaml (for extension field names)'
+        required: true
+        default: 'schema/leagues/mlb/sources.yaml'
+      csvFile:
+        description: 'Output CSV file'
+        required: true
+        default: 'data/mlb/players.csv'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dump_sheet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout crosswalk-data repo
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      
+      - name: Clone prism-tools
+        run: |
+          git clone https://github.com/statsvine/prism-tools.git tools
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tools/requirements.txt || true
+
+      - name: Run dump sheet script
+        id: dump_sheet
+        run: |
+          python tools/crosswalk/dump_sheets_to_csv.py ${{github.event.inputs.sheetId}} --gid ${{github.event.inputs.sheetGid}} --core-schema ${{github.event.inputs.coreSchema}} --source-schema ${{github.event.inputs.sourceSchema}} --out ${{github.event.inputs.csvFile}}
+      
+      - name: Generate missing IDs
+        id: generate_missing_ids
+        # TODO we're using defaults here, should probably parameterize
+        run: |
+          python tools/csv/generate_missing_ids.py --csv ${{github.event.inputs.csvFile}}
+      
+      - name: Sort by ID
+        id: sort_by_col
+        run: |
+          python tools/csv/sort_by_col.py ${{github.event.inputs.csvFile}}
+      
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: ${{ github.event.inputs.branchName }}
+          add-paths: |
+            ${{github.event.inputs.csvFile}}
