@@ -10,6 +10,15 @@ on:
         description: 'Google sheet gid'
         required: true
         default: '0'
+      title:
+        description: 'Pull request title'
+        required: true
+      description:
+        description: 'Pull request description'
+        required: true
+      commitMessage:
+        description: 'Commit message'
+        required: false
       branchName:
         description: 'Branch name'
         required: true
@@ -73,5 +82,8 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           branch: ${{ github.event.inputs.branchName }}
+          title: ${{ github.event.inputs.title }}
+          body: ${{ github.event.inputs.description }}
+          commit-message: ${{ github.event.inputs.commitMessage }}
           add-paths: |
             ${{github.event.inputs.csvFile}}
