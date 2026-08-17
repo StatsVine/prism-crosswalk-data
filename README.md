@@ -40,13 +40,16 @@ If you're working with player data from multiple sources and need a reliable way
 
 ## Scope
 
-Currently **MLB only** (~1,700+ players). Coverage includes all players who appeared on a 40-man roster during the 2025 or 2026 seasons, with ongoing tracking of active players as rosters change.
+- **MLB** (~1,700 players) — all players who appeared on a 40-man roster during the 2025 or 2026 seasons, with ongoing tracking of active players as rosters change.
+- **NFL** (in progress) — an initial pool of fantasy-relevant players for the 2026 season. Seeded with quarterbacks and expanding to the remaining skill positions.
 
 See [`schema/schema.md`](schema/schema.md) for field definitions, validation rules, and source details.
 
 ## Data Quality & Automation
 
-A suite of automated checks runs daily to keep the dataset complete and accurate, cross-referencing against multiple independent sources:
+Every push and pull request validates all CSV files against their schemas, for every league.
+
+On top of that, a suite of automated checks runs daily against MLB, cross-referencing multiple independent sources:
 
 - **MLB 40-man rosters** — flags players on active rosters who are missing from the dataset
 - **Chadwick Bureau register** — cross-references against the community baseball register
@@ -54,6 +57,8 @@ A suite of automated checks runs daily to keep the dataset complete and accurate
 - **FanGraphs** (in-season) — detects ID redirects that indicate minor-league-to-MLB promotions
 
 This gives us fast detection of missing players and stale mappings as they happen.
+
+The equivalent NFL cross-checks — against nflverse, DynastyProcess, Sleeper, and Wikidata — are not yet in place; NFL data is currently covered by schema validation only.
 
 ## Roadmap
 
@@ -65,13 +70,13 @@ This gives us fast detection of missing players and stale mappings as they happe
 - **Player focus**: Active/current players first. Historical backfill will be added as time permits.
 
 - **Planned sports coverage**:
-  - Currently: **MLB** (baseball).
-  - Near future: **NFL** (football), **NBA** (basketball).
+  - Currently: **MLB** (baseball), **NFL** (football, in progress).
+  - Near future: **NBA** (basketball).
   - Not currently prioritized: **NHL** (hockey), other sports.
 
 ## Repository Structure
 
-- `/data/` — source-of-truth CSV files, organized by sport/league
+- `/data/` — source-of-truth CSV files, organized by sport/league (`mlb/`, `nfl/`)
 - `/schema/` — schema definitions and validation rules (see [`schema/schema.md`](schema/schema.md))
 - `/.validation/` — suppression lists for known ID discrepancies (SFBB, Chadwick)
 - `/ATTRIBUTION.md` — upstream source credits
@@ -84,6 +89,11 @@ PRISM Crosswalk stands on the shoulders of giants and builds on open community d
 - MLB:
   - [Chadwick Bureau / Register](https://github.com/chadwickbureau/register) (Open Data Commons Attribution License)
   - [SmartFantasyBaseball's Player ID Map](https://www.smartfantasybaseball.com/tools/)
+- NFL:
+  - [nflverse](https://github.com/nflverse/nflverse-data) (CC BY 4.0)
+  - [DynastyProcess](https://github.com/dynastyprocess/data) (GPL-3.0)
+  - [Sleeper API](https://docs.sleeper.com/)
+  - [Wikidata](https://www.wikidata.org/) (CC0 1.0)
 
 ## License
 - Data and schemas in this repo are licensed under the [Open Data Commons Attribution License (ODC-By 1.0)](https://opendatacommons.org/licenses/by/1-0/).
