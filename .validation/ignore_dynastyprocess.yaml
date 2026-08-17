@@ -1,0 +1,10 @@
+---
+# Known DynastyProcess discrepancies to suppress, keyed by prism_id.
+# Each entry is a list of our field names to skip for that player, with a
+# comment explaining why.
+#
+# Note the checker already treats DynastyProcess's 'NA' sentinel as blank, so a
+# missing upstream value is never reported and does not belong here.
+#
+# 3zszjj1jwd: # Doe, John
+#   - yahoo_id # Wrong yahoo id in DynastyProcess

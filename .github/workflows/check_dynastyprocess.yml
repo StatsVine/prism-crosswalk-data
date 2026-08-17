@@ -1,0 +1,60 @@
+name: Check DynastyProcess Ids
+
+on:
+  workflow_dispatch:  # manually triggered
+  schedule:
+    - cron: '35 13 * * *'  # every day at 13:35 UTC (Pacific morning)
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check_dynastyprocess:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout crosswalk-data repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Clone prism-tools
+        run: |
+          git clone https://github.com/statsvine/prism-tools.git tools
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tools/requirements.txt || true
+
+      - name: Run DynastyProcess check script
+        id: run-script
+        run: |
+          python tools/crosswalk/nfl/validate_dynastyprocess_ids.py data/nfl/players.csv --issues dynastyprocess_issues.md --ignores-file .validation/ignore_dynastyprocess.yaml
+          if [ -f dynastyprocess_issues.md ]; then
+            echo "issues_file_found=1" >> $GITHUB_ENV
+          fi
+
+      - name: Find the last open report issue
+        if: env.issues_file_found == '1'
+        id: last-issue
+        uses: micalevisk/last-issue-action@v2
+        with:
+          state: open
+          labels: |
+            nfl
+            source-dynastyprocess
+            roster-gap
+
+      - name: Create GitHub Issue
+        if: env.issues_file_found == '1'
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: "📃 DynastyProcess ID differences detected"
+          content-filepath: ./dynastyprocess_issues.md
+          issue-number: ${{ steps.last-issue.outputs.issue-number }}
+          labels: nfl, source-dynastyprocess, roster-gap
