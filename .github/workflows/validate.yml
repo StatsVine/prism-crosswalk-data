@@ -32,3 +32,9 @@ jobs:
       - name: Run CSV validation on NFL players
         run: |
           python3 tools/crosswalk/validate_players.py --csv data/nfl/players.csv --core-schema schema/players.yaml --source-schema schema/leagues/nfl/sources.yaml --fail-fast
+
+      # Per-league validation only checks uniqueness within its own file, so
+      # check across every data/*/players.csv here. Discovers new leagues on its own.
+      - name: Check prism_id global uniqueness
+        run: |
+          python3 tools/crosswalk/check_global_prism_ids.py
