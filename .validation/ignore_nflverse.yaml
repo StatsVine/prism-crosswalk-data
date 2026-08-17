@@ -1,0 +1,8 @@
+---
+# Known nflverse discrepancies to suppress, keyed by prism_id.
+# Each entry is a list of our field names to skip for that player, with a
+# comment explaining why. Expect pfr_id churn here -- it is derived from the
+# player's name, so it is neither uniform nor permanent.
+#
+# 3zszjj1jwd: # Doe, John
+#   - pfr_id # Wrong pfr id in nflverse
