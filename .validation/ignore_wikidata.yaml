@@ -1,0 +1,11 @@
+---
+# Known Wikidata discrepancies to suppress, keyed by prism_id.
+# The only field this checker compares is wikidata_id, so each entry is
+# effectively a single-item list, with a comment explaining why.
+#
+# Wikidata is community-edited, so a mismatch here usually means someone
+# attached the wrong Pro-Football-Reference or ESPN id to an item upstream --
+# worth fixing there rather than suppressing, where you can.
+#
+# 3zszjj1jwd: # Doe, John
+#   - wikidata_id # Two items for the same player upstream

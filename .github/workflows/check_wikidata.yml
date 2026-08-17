@@ -1,0 +1,62 @@
+name: Check Wikidata Ids
+
+on:
+  workflow_dispatch:  # manually triggered
+  schedule:
+    - cron: '45 13 * * *'  # every day at 13:45 UTC (Pacific morning)
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check_wikidata:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout crosswalk-data repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Clone prism-tools
+        run: |
+          git clone https://github.com/statsvine/prism-tools.git tools
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tools/requirements.txt || true
+
+      # The script is league-agnostic; add an MLB step here once
+      # data/mlb/players.csv carries a wikidata_id column.
+      - name: Run Wikidata check script on NFL players
+        id: run-script
+        run: |
+          python tools/crosswalk/validate_wikidata_ids.py data/nfl/players.csv --league nfl --issues wikidata_issues.md --ignores-file .validation/ignore_wikidata.yaml
+          if [ -f wikidata_issues.md ]; then
+            echo "issues_file_found=1" >> $GITHUB_ENV
+          fi
+
+      - name: Find the last open report issue
+        if: env.issues_file_found == '1'
+        id: last-issue
+        uses: micalevisk/last-issue-action@v2
+        with:
+          state: open
+          labels: |
+            nfl
+            source-wikidata
+            roster-gap
+
+      - name: Create GitHub Issue
+        if: env.issues_file_found == '1'
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: "📃 Wikidata ID differences detected"
+          content-filepath: ./wikidata_issues.md
+          issue-number: ${{ steps.last-issue.outputs.issue-number }}
+          labels: nfl, source-wikidata, roster-gap
