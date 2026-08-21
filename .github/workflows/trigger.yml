@@ -4,14 +4,62 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      sports:
+        description: "Space-separated sports to rebuild"
+        default: "mlb nfl"
 
 jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger prism-crosswalk build
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Work out which sports changed
+        id: sports
+        env:
+          ALL_SPORTS: "mlb nfl"
+          INPUT_SPORTS: ${{ inputs.sports }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
         run: |
+          set -euo pipefail
+          if [ -n "$INPUT_SPORTS" ]; then
+            SPORTS="$INPUT_SPORTS"
+          elif ! git rev-parse --quiet --verify "$BEFORE^{commit}" >/dev/null 2>&1; then
+            # First push or rewritten history: we cannot diff, so rebuild everything
+            SPORTS="$ALL_SPORTS"
+          else
+            CHANGED="$(git diff --name-only "$BEFORE" "$AFTER")"
+            if echo "$CHANGED" | grep -qx 'schema/players.yaml'; then
+              # The core schema is shared by every league
+              SPORTS="$ALL_SPORTS"
+            else
+              SPORTS=""
+              for s in $ALL_SPORTS; do
+                if echo "$CHANGED" | grep -qE "^(data|schema/leagues)/$s/"; then
+                  SPORTS="$SPORTS $s"
+                fi
+              done
+            fi
+          fi
+          SPORTS="$(echo $SPORTS | xargs || true)"
+          echo "Sports to rebuild: ${SPORTS:-<none>}"
+          echo "sports=$SPORTS" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger prism-crosswalk build
+        if: steps.sports.outputs.sports != ''
+        env:
+          SPORTS: ${{ steps.sports.outputs.sports }}
+        run: |
+          PAYLOAD="$(jq -nc --arg s "$SPORTS" \
+            '{event_type:"crosswalk-data-updated",
+              client_payload:{sports:($s|split(" "))}}')"
           curl -X POST https://api.github.com/repos/statsvine/prism-crosswalk/dispatches \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.CROSSWALK_DISPATCH_TOKEN }}" \
-            -d '{"event_type":"crosswalk-data-updated"}'            
+            -d "$PAYLOAD"
