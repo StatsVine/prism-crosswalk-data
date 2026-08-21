@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Checkout crosswalk-data repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.11'
 
@@ -54,7 +54,7 @@ jobs:
 
       - name: Create GitHub Issue
         if: env.issues_file_found == '1'
-        uses: peter-evans/create-issue-from-file@v4
+        uses: peter-evans/create-issue-from-file@v6
         with:
           title: "📃 Wikidata ID differences detected"
           content-filepath: ./wikidata_issues.md
