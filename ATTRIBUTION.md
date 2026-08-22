@@ -31,7 +31,10 @@ In addition to the sites referenced, we acknowledge and thank the following proj
 
 - **Sleeper - Players API**
   - Source: https://docs.sleeper.com/
-  - Notes: Used for supplemental ID mappings across fantasy platforms.
+  - Notes: Used for supplemental ID mappings across fantasy platforms. Consumed via
+    our own daily snapshot at https://github.com/statsvine/data-snapshots rather than
+    called directly — the docs ask that the players endpoint be pulled at most once
+    a day.
 
 - **Wikidata**
   - Source: https://www.wikidata.org/
