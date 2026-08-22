@@ -11,3 +11,8 @@
 #
 # 3zszjj1jwd: # Doe, John
 #   - nffc_id # Wrong nffc id in ffb_ids
+
+k3gtnf1kkh: # Hunter, Travis
+  - yahoo_id # ffb_ids carries a 99001 placeholder, not a real Yahoo id. Sleeper
+             # and DynastyProcess both have no yahoo_id for him at all, so ours
+             # (41787) is the only real value any source holds.
