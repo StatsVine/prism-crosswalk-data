@@ -36,6 +36,11 @@ In addition to the sites referenced, we acknowledge and thank the following proj
     called directly — the docs ask that the players endpoint be pulled at most once
     a day.
 
+- **ffb_ids - Fantasy Football Player IDs**
+  - Source: https://github.com/mayscopeland/ffb_ids
+  - Notes: Used to cross-check the espn, nffc, sleeper and yahoo ids it shares
+    with us — and the only upstream map we have found for nffc_id.
+
 - **Wikidata**
   - Source: https://www.wikidata.org/
   - License: Creative Commons CC0 1.0 Universal (public domain dedication)

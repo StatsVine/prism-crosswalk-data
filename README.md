@@ -65,6 +65,8 @@ The equivalent NFL cross-checks run daily against four independent sources:
 - **Sleeper** — validates sleeper ids first-hand, plus the espn, gsis, sportradar and yahoo ids Sleeper carries
 - **Wikidata** — validates wikidata ids against the Wikidata query service
 
+A weekly check against [ffb_ids](https://github.com/mayscopeland/ffb_ids) cross-references espn, nffc, sleeper and yahoo ids — including nffc, which no daily source publishes. It runs weekly rather than daily because that dataset is refreshed by hand roughly once a year.
+
 ## Roadmap
 
 - **Primary development priorities**:
@@ -98,6 +100,7 @@ PRISM Crosswalk stands on the shoulders of giants and builds on open community d
   - [nflverse](https://github.com/nflverse/nflverse-data) (CC BY 4.0)
   - [DynastyProcess](https://github.com/dynastyprocess/data) (GPL-3.0)
   - [Sleeper API](https://docs.sleeper.com/)
+  - [ffb_ids](https://github.com/mayscopeland/ffb_ids)
   - [Wikidata](https://www.wikidata.org/) (CC0 1.0)
 
 ## License
