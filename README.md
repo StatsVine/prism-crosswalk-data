@@ -58,7 +58,12 @@ On top of that, a suite of automated checks runs daily against MLB, cross-refere
 
 This gives us fast detection of missing players and stale mappings as they happen.
 
-The equivalent NFL cross-checks — against nflverse, DynastyProcess, Sleeper, and Wikidata — are not yet in place; NFL data is currently covered by schema validation only.
+The equivalent NFL cross-checks run daily against four independent sources:
+
+- **nflverse** — validates gsis, pfr and espn ids against the nflverse players release
+- **DynastyProcess** — validates sleeper, sportradar and yahoo ids against their player ID map
+- **Sleeper** — validates sleeper ids first-hand, plus the espn, gsis, sportradar and yahoo ids Sleeper carries
+- **Wikidata** — validates wikidata ids against the Wikidata query service
 
 ## Roadmap
 
