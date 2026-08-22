@@ -38,11 +38,8 @@ In addition to the sites referenced, we acknowledge and thank the following proj
 
 - **ffb_ids - Fantasy Football Player IDs**
   - Source: https://github.com/mayscopeland/ffb_ids
-  - License: None declared upstream
-  - Notes: Used to cross-check the ids it shares with us -- espn, nffc, sleeper and
-    yahoo -- and the only upstream map we have found for nffc_id. Consulted as a
-    validation source only; no values are imported from it in bulk while its
-    licensing is unstated.
+  - Notes: Used to cross-check the espn, nffc, sleeper and yahoo ids it shares
+    with us — and the only upstream map we have found for nffc_id.
 
 - **Wikidata**
   - Source: https://www.wikidata.org/

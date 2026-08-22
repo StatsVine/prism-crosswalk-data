@@ -100,7 +100,7 @@ PRISM Crosswalk stands on the shoulders of giants and builds on open community d
   - [nflverse](https://github.com/nflverse/nflverse-data) (CC BY 4.0)
   - [DynastyProcess](https://github.com/dynastyprocess/data) (GPL-3.0)
   - [Sleeper API](https://docs.sleeper.com/)
-  - [ffb_ids](https://github.com/mayscopeland/ffb_ids) (no license declared)
+  - [ffb_ids](https://github.com/mayscopeland/ffb_ids)
   - [Wikidata](https://www.wikidata.org/) (CC0 1.0)
 
 ## License
