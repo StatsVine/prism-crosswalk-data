@@ -1,0 +1,13 @@
+---
+# Known ffb_ids discrepancies to suppress, keyed by prism_id.
+# Each entry is a list of our field names to skip for that player, with a
+# comment explaining why.
+#
+# Every column ffb_ids and PRISM both carry is checked: espn, nffc, sleeper and
+# yahoo. The file is refreshed by hand roughly once a year, so expect it to lag
+# on players who arrived mid-season rather than to disagree outright -- and note
+# it takes its sleeper ids from Sleeper, so check a sleeper_id finding against
+# the Sleeper checker before suppressing it here.
+#
+# 3zszjj1jwd: # Doe, John
+#   - nffc_id # Wrong nffc id in ffb_ids
