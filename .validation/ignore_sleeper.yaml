@@ -1,0 +1,11 @@
+---
+# Known Sleeper discrepancies to suppress, keyed by prism_id.
+# Each entry is a list of our field names to skip for that player, with a
+# comment explaining why.
+#
+# Sleeper is first-hand for sleeper_id, so a mismatch there is almost always
+# ours to fix rather than to suppress. The borrowed ids (espn, gsis, sportradar,
+# yahoo) are the ones that drift.
+#
+# 3zszjj1jwd: # Doe, John
+#   - espn_id # Wrong espn id in Sleeper
