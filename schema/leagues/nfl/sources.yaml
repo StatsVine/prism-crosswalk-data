@@ -7,6 +7,31 @@ players:
     required: false
     stable: true
     pattern: ^\d{1,8}$
+  - fantasypros:
+    name: FantasyPros
+    id_field: fantasypros_id
+    active: true
+    required: false
+    stable: true
+    pattern: ^\d{1,8}$
+    note: >-
+      The API key. It does not resolve on the website, which is why
+      fantasypros_slug is carried alongside it rather than derived from it.
+  - fantasypros_slug:
+    name: FantasyPros (URL slug)
+    id_field: fantasypros_slug
+    active: true
+    required: false
+    stable: false
+    pattern: ^[a-z0-9][a-z0-9\-]{1,63}$
+    note: >-
+      The web key: /nfl/players/{fantasypros_slug}.php is the only way to reach
+      a player page, since fantasypros_id does not resolve there. May not be
+      stable. It does not track the displayed name -- marquise-brown still
+      serves the player now shown as Hollywood Brown -- but it can be rewritten
+      for disambiguation: the 2018 quarterback is josh-allen-qb, not josh-allen,
+      despite predating the linebacker he is disambiguated from. Around 240
+      slugs carry a position suffix.
   - gsis:
     name: NFL GSIS (Game Stats and Info Service)
     id_field: gsis_id
