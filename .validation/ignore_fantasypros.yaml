@@ -1,0 +1,20 @@
+---
+# Known FantasyPros discrepancies to suppress, keyed by prism_id.
+# Each entry is a list of our field names to skip for that player, with a
+# comment explaining why.
+#
+# FantasyPros is first-hand for fantasypros_id and fantasypros_slug, so a
+# mismatch in either is usually ours to fix rather than to suppress. Note a
+# bad FantasyPros URL returns HTTP 200 with the search page, so a slug
+# loading is not evidence it is right.
+#
+# 3zszjj1jwd: # Doe, John
+#   - fantasypros_slug # Slug never minted upstream; player page 404s
+
+k3gtnf1kkh: # Hunter, Travis
+  - yahoo_id # Policy, not an upstream defect. FantasyPros splits two-way
+             # players into one record per role and reports paired synthetic
+             # ids (99001/99002); Yahoo Fantasy is believed to do the same,
+             # as it does for Ohtani P vs H. We carry the Yahoo Sports id
+             # (41787) and suppress fantasy-side synthetics. Same call as
+             # Ohtani in ignore_sfbb.yaml.
