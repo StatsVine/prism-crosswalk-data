@@ -9,3 +9,7 @@
 #
 # 3zszjj1jwd: # Doe, John
 #   - espn_id # Wrong espn id in Sleeper
+bprsm7p7sr: # Conklin, Tyler
+  - espn_id # Sleeper swaps espn/gsis with Ryan Izzo (5094); 3915486 is Conklin
+  - gsis_id # Same swap; nflverse and DynastyProcess have 00-0034270 for Conklin
+  - yahoo_id # Sleeper has Izzo's 31220; Yahoo's own page has 31127 for Conklin
