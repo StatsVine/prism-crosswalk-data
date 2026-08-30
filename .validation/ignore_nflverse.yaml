@@ -6,3 +6,5 @@
 #
 # 3zszjj1jwd: # Doe, John
 #   - pfr_id # Wrong pfr id in nflverse
+d0bey79v6w: # Manhertz, Chris
+  - espn_id # nflverse has ESPN's dead duplicate 4071345; 2531358 is the live one
