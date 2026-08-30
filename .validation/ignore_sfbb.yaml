@@ -39,5 +39,7 @@ q532kgry10: # Mack, Joe
   - bbref_id # Wrong bbref id in SFBB
 qh49shdnxr: #	Rumfield, TJ 	
   - fangraphs_id # Wrong fangraph id in SFBB
+sygqw8mz8m: # Cabrera, Jose
+  - bbref_id # Wrong bbref id in SFBB; cabrejo01 is the 1972 José Cabrera
 vm5n35ysl8: # Shane Smith
   - bbref_id # Wrong bbref id in SFBB
