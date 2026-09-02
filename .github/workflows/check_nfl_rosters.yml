@@ -1,0 +1,63 @@
+name: Check NFL Roster Gaps
+
+on:
+  workflow_dispatch:  # manually triggered
+  schedule:
+    - cron: '25 14 * * *'  # every day at 14:25 UTC (Pacific morning)
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check_nfl_rosters:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout crosswalk-data repo
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      - name: Clone prism-tools
+        run: |
+          git clone https://github.com/statsvine/prism-tools.git tools
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tools/requirements.txt || true
+
+      - name: Run roster gap check script
+        id: run-script
+        run: |
+          python tools/crosswalk/nfl/check_missing_nfl_rostered.py \
+            data/nfl/players.csv \
+            --ignores-file .validation/ignore_nfl_gaps.yaml \
+            --issues-file nfl_roster_issues.md
+          if [ -f nfl_roster_issues.md ]; then
+            echo "issues_file_found=1" >> $GITHUB_ENV
+          fi
+
+      - name: Find the last open report issue
+        if: env.issues_file_found == '1'
+        id: last-issue
+        uses: micalevisk/last-issue-action@v2
+        with:
+          state: open
+          labels: |
+            nfl
+            source-nflverse
+            roster-gap
+
+      - name: Create/update GitHub Issue
+        if: env.issues_file_found == '1'
+        uses: peter-evans/create-issue-from-file@v6
+        with:
+          title: "🔍 Missing players from NFL rosters"
+          content-filepath: ./nfl_roster_issues.md
+          issue-number: ${{ steps.last-issue.outputs.issue-number }}
+          labels: nfl, source-nflverse, roster-gap
