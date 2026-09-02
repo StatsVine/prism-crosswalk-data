@@ -1,0 +1,10 @@
+---
+# Rostered NFL players deliberately absent from the crosswalk, keyed by gsis_id.
+# Presence of the key suppresses the player; the value is free-form and exists
+# only to carry the reason.
+#
+# Unlike the other ignore files in this directory, these players have no
+# prism_id yet -- that is the whole point -- so gsis_id is the key. Use the
+# value to say why the player is not being added, not merely that they aren't.
+#
+# 00-0000000: Doe, John -- reason the player is intentionally not carried
