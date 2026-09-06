@@ -43,5 +43,7 @@ qh49shdnxr: #	Rumfield, TJ
   - fangraphs_id # Wrong fangraph id in SFBB
 sygqw8mz8m: # Cabrera, Jose
   - bbref_id # Wrong bbref id in SFBB; cabrejo01 is the 1972 José Cabrera
+tyfdqg19x4: # Marte, Yunior
+  - bbref_id # Wrong bbref id in SFBB; marteyu01 is the 1995 Yunior Marte (mlbam 628708), this one is marteyu02
 vm5n35ysl8: # Shane Smith
   - bbref_id # Wrong bbref id in SFBB
