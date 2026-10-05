@@ -43,6 +43,8 @@ q532kgry10: # Mack, Joe
   - bbref_id # Wrong bbref id in SFBB
 qh49shdnxr: #	Rumfield, TJ 	
   - fangraphs_id # Wrong fangraph id in SFBB
+slqsl23v80: # Mesa Jr., Victor
+  - bbref_id # Wrong bbref id in SFBB (mesavi02); mesavi01 is correct
 sygqw8mz8m: # Cabrera, Jose
   - bbref_id # Wrong bbref id in SFBB; cabrejo01 is the 1972 José Cabrera
 tyfdqg19x4: # Marte, Yunior
